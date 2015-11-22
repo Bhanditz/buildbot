@@ -13,7 +13,7 @@ GIT_REVISION=`git rev-parse HEAD`
 
 if [ $TRAVIS_OS_NAME = "linux" ]; then
   if [ $BUILD_TARGET = "device" ]; then
-    ./third_party/android_tools/sdk/build-tools/22.0.1/aapt --help
+    ls ./third_party/android_tools/sdk/build-tools/22.0.1
     # patch -p1 <../logs.patch
     ./sky/tools/gn --release --android
     ninja -C out/android_Release apks/SkyShell.apk flutter.mojo
