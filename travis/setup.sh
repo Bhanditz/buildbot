@@ -11,7 +11,7 @@ if [ $TRAVIS_OS_NAME = "osx" ] && [ $BUILD_TARGET = "device" ]; then
 fi
 
 export CLOUDSDK_CORE_DISABLE_PROMPTS=1
-curl https://sdk.cloud.google.com | bash
+# curl https://sdk.cloud.google.com | bash
 
 git clone https://chromium.googlesource.com/chromium/tools/depot_tools.git
 PATH=`pwd`/depot_tools:"$PATH"
@@ -25,4 +25,9 @@ gclient sync
 
 if [ $BUILD_TARGET = "device" ]; then
   ./tools/android/download_android_tools.py
+
+  ls third_party/android_tools/
+  cat third_party/android_tools/VERSION_LINUX_NDK
+  cat third_party/android_tools/VERSION_LINUX_SDK
+  find ./third_party/android_tools/sdk/build-tools
 fi
