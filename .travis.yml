@@ -21,16 +21,6 @@ addons:
       - libxcursor-dev
       - libxrender-dev
       - libxtst-dev
-      # Needed for Android builds:
-      - ant
-      - gcc-multilib
-      - lib32stdc++6
-      - lib32z1
-      - libncurses5:i386
-      - libstdc++6:i386
-      - openjdk-7-jdk
-      - openjdk-7-jre
-      - zlib1g:i386
 before_script:
   - ./travis/setup.sh
 script:

@@ -24,5 +24,8 @@ git checkout $GIT_REVISION
 gclient sync
 
 if [ $BUILD_TARGET = "device" ]; then
+  sudo apt-get install -y ant gcc-multilib lib32stdc++6 lib32z1 \
+    libncurses5:i386 libstdc++6:i386 openjdk-7-jdk openjdk-7-jre zlib1g:i386
+
   ./tools/android/download_android_tools.py
 fi
