@@ -23,6 +23,9 @@ addons:
       - libxtst-dev
       # Needed for Android builds:
       - ant
+      - gcc-multilib
+      - lib32stdc++6
+      - lib32z1
       - libncurses5:i386
       - libstdc++6:i386
       - openjdk-7-jdk

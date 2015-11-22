@@ -25,9 +25,4 @@ gclient sync
 
 if [ $BUILD_TARGET = "device" ]; then
   ./tools/android/download_android_tools.py
-
-  ls third_party/android_tools/
-  cat third_party/android_tools/VERSION_LINUX_NDK
-  cat third_party/android_tools/VERSION_LINUX_SDK
-  find ./third_party/android_tools/sdk/build-tools
 fi
