@@ -13,6 +13,10 @@ GIT_REVISION=`git rev-parse HEAD`
 
 if [ $TRAVIS_OS_NAME = "linux" ]; then
   if [ $BUILD_TARGET = "device" ]; then
+    ./third_party/android_tools/sdk/build-tools/22.0.1/aapt --help
+
+    patch -p1 <../logs.patch
+
     ./sky/tools/gn --release --android
     ninja -C out/android_Release apks/SkyShell.apk flutter.mojo
     # STORAGE_BASE_URL=gs://mojo_infra/flutter/$GIT_REVISION/android-arm
