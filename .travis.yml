@@ -1,7 +1,10 @@
 language: cpp
 os:
-  - osx
+  # - osx
   - linux
+env:
+  - BUILD_TARGET=device
+  # - BUILD_TARGET=host
 sudo: required
 dist: trusty
 compiler:
@@ -18,6 +21,13 @@ addons:
       - libxcursor-dev
       - libxrender-dev
       - libxtst-dev
+      # Needed for Android builds:
+      - ant
+      - libncurses5:i386
+      - libstdc++6:i386
+      - openjdk-7-jdk
+      - openjdk-7-jre
+      - zlib1g:i386
 before_script:
   - ./travis/setup.sh
 script:
