@@ -31,4 +31,7 @@ if [ $BUILD_TARGET = "device" ]; then
       libncurses5:i386 libstdc++6:i386 libgcc1:i386 zlib1g:i386
 
   ./tools/android/download_android_tools.py
+
+  # Remove the mips toolchains to save space inside the VM.
+  rm -rf third_party/android_tools/ndk/toolchains/mips*
 fi
