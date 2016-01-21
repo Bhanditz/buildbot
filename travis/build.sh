@@ -17,15 +17,24 @@ if [ $TRAVIS_OS_NAME = "linux" ]; then
     ninja -C out/android_Release apks/SkyShell.apk flutter.mojo
     STORAGE_BASE_URL=gs://mojo_infra/flutter/$GIT_REVISION/android-arm
 
+    # TODO(mpcomplete): stop bundling classes.dex once
+    # https://github.com/flutter/flutter/pull/1263 lands.
     zip -j /tmp/artifacts.zip \
       build/android/ant/chromium-debug.keystore \
       out/android_Release/apks/SkyShell.apk \
       out/android_Release/flutter.mojo \
+      out/android_Release/gen/sky/shell/shell/classes.dex.jar \
       out/android_Release/gen/sky/shell/shell/classes.dex \
       out/android_Release/gen/sky/shell/shell/shell/libs/armeabi-v7a/libsky_shell.so \
       out/android_Release/icudtl.dat
 
     $GSUTIL cp /tmp/artifacts.zip $STORAGE_BASE_URL/artifacts.zip
+
+    # Also upload GCM service libraries.
+    $GSUTIL cp out/android_Release/gen/sky/services/gcm/gcm_lib.dex.jar \
+      $STORAGE_BASE_URL/gcm/gcm_lib.dex.jar
+    $GSUTIL cp out/android_Release/gen/sky/services/gcm/interfaces_java.dex.jar \
+      $STORAGE_BASE_URL/gcm/interfaces_java.dex.jar
   fi
 
   if [ $BUILD_TARGET = "host" ]; then
