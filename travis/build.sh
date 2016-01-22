@@ -14,7 +14,7 @@ $GCLOUD auth activate-service-account --key-file ../gcloud_key_file.json
 if [ $TRAVIS_OS_NAME = "linux" ]; then
   if [ $BUILD_TARGET = "device" ]; then
     ./sky/tools/gn --release --android
-    ninja -C out/android_Release apks/SkyShell.apk flutter.mojo
+    ninja -C out/android_Release apks/SkyShell.apk flutter.mojo sky/services/gcm
     STORAGE_BASE_URL=gs://mojo_infra/flutter/$GIT_REVISION/android-arm
 
     # TODO(mpcomplete): stop bundling classes.dex once
