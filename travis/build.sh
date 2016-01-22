@@ -13,8 +13,8 @@ $GCLOUD auth activate-service-account --key-file ../gcloud_key_file.json
 
 if [ $TRAVIS_OS_NAME = "linux" ]; then
   if [ $BUILD_TARGET = "device" ]; then
-    ./sky/tools/gn --release --android
-    ninja -C out/android_Release apks/SkyShell.apk flutter.mojo sky/services/gcm
+    ./sky/tools/gn --release --android --enable-firebase --enable-gcm
+    ninja -C out/android_Release apks/SkyShell.apk flutter.mojo sky/services/gcm sky/services/firebase
     STORAGE_BASE_URL=gs://mojo_infra/flutter/$GIT_REVISION/android-arm
 
     # TODO(mpcomplete): stop bundling classes.dex once
@@ -30,11 +30,17 @@ if [ $TRAVIS_OS_NAME = "linux" ]; then
 
     $GSUTIL cp /tmp/artifacts.zip $STORAGE_BASE_URL/artifacts.zip
 
-    # Also upload GCM service libraries.
+    # Upload GCM service libraries.
     $GSUTIL cp out/android_Release/gen/sky/services/gcm/gcm_lib.dex.jar \
       $STORAGE_BASE_URL/gcm/gcm_lib.dex.jar
     $GSUTIL cp out/android_Release/gen/sky/services/gcm/interfaces_java.dex.jar \
       $STORAGE_BASE_URL/gcm/interfaces_java.dex.jar
+
+    # Upload Firebase service libraries.
+    $GSUTIL cp out/android_Release/gen/sky/services/firebase/firebase_lib.dex.jar \
+      $STORAGE_BASE_URL/firebase/gcm_lib.dex.jar
+    $GSUTIL cp out/android_Release/gen/sky/services/firebase/interfaces_java.dex.jar \
+      $STORAGE_BASE_URL/firebase/interfaces_java.dex.jar
   fi
 
   if [ $BUILD_TARGET = "host" ]; then
