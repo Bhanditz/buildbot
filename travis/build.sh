@@ -38,7 +38,7 @@ if [ $TRAVIS_OS_NAME = "linux" ]; then
 
     # Upload Firebase service libraries.
     $GSUTIL cp out/android_Release/gen/sky/services/firebase/firebase_lib.dex.jar \
-      $STORAGE_BASE_URL/firebase/gcm_lib.dex.jar
+      $STORAGE_BASE_URL/firebase/firebase_lib.dex.jar
     $GSUTIL cp out/android_Release/gen/sky/services/firebase/interfaces_java.dex.jar \
       $STORAGE_BASE_URL/firebase/interfaces_java.dex.jar
   fi
